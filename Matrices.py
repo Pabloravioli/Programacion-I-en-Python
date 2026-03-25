@@ -13,17 +13,17 @@
 #         print(matriz[fila][columna])
 #         
 #         
-# #Ejercicio Ejemplo
-# 
+#Ejercicio Ejemplo
+
 # datosAlumnos =[]
 # 
-# cantAlumnos = int(input("Ingrese la cantidad de alumnos a procesar"))
+# cantAlumnos = int(input("Ingrese la cantidad de alumnos a procesar: "))
 # 
 # for fila in range(cantAlumnos):
 #     alumnos = []
 #     
-#     nombre = input("Ingrese el nombre del alumno")
-#     legajo = int(input("Ingrese el legajo del alumno"))
+#     nombre = input("Ingrese el nombre del alumno: ")
+#     legajo = int(input("Ingrese el legajo del alumno: "))
 #     
 #     alumnos.append(nombre)
 #     alumnos.append(legajo)
@@ -36,9 +36,9 @@
 # #PARA USAR "\" es altGr + ? 
 # 
 # for fila in range(len(datosAlumnos)):
-#     print("Nombre: ", datosAlumnos[fila][0], "Legajo: " , datosAlumnos[fila][1])
-    
-
+#     print("Nombre: ", datosAlumnos[fila][0], "Legajo: " , datosAlumnos[fila][1], "\n")
+#     
+###################################################################################################################
 # #Ejercicio 1
 # Sistemas de reservas de cine
 # 
@@ -70,7 +70,7 @@
 #     for fila in matriz:
 #         print(fila)
 #         
-# def reservar_asiento(fila,columna):
+# def reservar_asiento(matriz,fila,columna):
 #     if matriz[fila][columna] == 0:
 #         matriz[fila][columna]=1
 #     else:
@@ -86,11 +86,11 @@
 #     return asientosLibres
 # 
 # def main():
-#     cine = crear_sala(5,6)
+#     cine = crear_sala(5,5)
 # 
 #     
-#     fila = int(input("Ingrese la fila que desea reservar del 1 al 5"))
-#     asiento = int(input("Ingrese el asiento de la fila que desea ocupar"))
+#     fila = int(input("Ingrese la fila que desea reservar del 1 al 5"))-1
+#     asiento = int(input("Ingrese el asiento de la fila que desea ocupar"))-1
 #     reservar_asiento(cine, fila, asiento)
 #     
 #     mostrar_sala(cine)
@@ -98,11 +98,12 @@
 #     print("La cantidad de asientos libres es: ",contar_asientos_libres(cine))
 #     
 # main()
+#CORREGIDO###########################################################################################################
 
 #Ejercicio 2
 # - Crear matriz con números consecutivos (hecho)
-# - Sumar diagonal (falta hacer)
-# - Contar pares (falta hacer)
+# - Sumar diagonal (Hecho)
+# - Contar pares (Hecho)
 
 # def crear_matriz(filas,columnas):
 #     matriz = []
@@ -118,68 +119,103 @@
 #         
 #     return matriz
 # 
+# def mostrar_matriz(matriz):
+#     for fila in matriz:
+#         print(fila)
 # 
-# def sumar_diagonal():   
+# 
+# def sumar_diagonal(matriz):
+#     sumador = 0
+#     for f in range(len(matriz)):  ###### me indica la cantidad de filas
+#         
+#         sumador = sumador + matriz[f][f] 
+#         
+#     return sumador
+# 
+# def contar_pares(matriz):
+#     contador = 0
+#     for f in range(len(matriz)):
+#         
+#         for c in range(len(matriz[f])):
+#             
+#             if matriz[f][c]%2 == 0:
+#                 
+#                 contador = contador + 1
 #     
-# matriz_numeros = crear_matriz(2,2)
-# print(matriz)
-
+#     return contador
+#             
+#             
+#             
+#         
+#         
+#     
+# def main():         
+#     matriz_numeros = crear_matriz(2,2)
+#     print("Matriz creada: ")
+#     mostrar_matriz(matriz_numeros)
+#     suma = sumar_diagonal(matriz_numeros)
+#     print("\nLa suma de la diagonal de la matriz es:",suma)
+#     cantidad_de_pares = contar_pares(matriz_numeros)
+#     print("\nLa cantidad de numeros pares en la matriz es:",cantidad_de_pares)
+#       
+# main()
+#CORREGIDO##################################################################
 # #Ejercicio 3 (Revisar y completar el ejercicio)
 # #Mostrar las notas
 # #Promedio por alumno
 # #Promedio general de todos los alumnos
 # #Contar la cantidad de aprobados 4 o mayor de cuatro
-# 
-# def cargar_matriz_alumnos(cantidadAlumnos, cantNotasxAlumno):
-#     matrizNotas =[]
-#     
-#     for i in range(cantidadAlumnos):
-#         notaAlumno =[]
-#         for j in range(cantNotasxAlumno):
-#             
-#             notas = int(input("Ingrese la nota"))
-#             notasAlumno.append(nota)
-#         matrizNotas.append(notasAlumnos)
-#     return matrizNotas
-# 
-# 
-# def mostrar_matriz_notas():
-#     
-#     for i in range(len(matrizNotas)):
-#         
-#         for i in range(len(matrizNotas)):
-#             print("Alumno" , i+1, ":", end=" ")
-#             for j in range(len(matriz[i])):
-#                 print(matrizNotas[i][j], end= " ")
-#         print()
-#         
-# 
-# def promedio_por_alumno(notasAlumno):
-#     
-#     suma = 0
-#     for nota in notasAlumno:
-#         suma+=nota
-#         
-#     return suma/len(notasAlumnos)
-# 
-# def promedio_general_comision(matrizNotas):
-#     
-# 
-# 
-# 
-# def main():
-#     cantAlumnos = int(input("Ingrese la cantidad de alumnos que desea procesar"))
-#     cantNotasxAlumnos = int(input("Ingrese la cantidad de notas por alumno que desea procesar"))
-#     
-#     matrizNotas = cargar_matriz_alumnos(cantAlumnos, cantNotasxAlumnos)
-#     
-#     mostrar_matriz_notas(matrizNotas)
-#     
-#     
-#     for i in range(len(matrizNotas)):
-#         promedio = promedio_por_alumno(matrizNotas[i])
-#         print("El promedio del alumno ", i+1, "es ", promedio)
-#     
+
+def cargar_matriz_alumnos(cantidadAlumnos, cantNotasxAlumno):
+    matrizNotas =[]
+    
+    for i in range(cantidadAlumnos):
+        notasAlumno =[]
+        for j in range(cantNotasxAlumno):
+            
+            nota = int(input("Ingrese la nota"))
+            notasAlumno.append(nota)
+        matrizNotas.append(notasAlumno)
+    return matrizNotas
+
+
+def mostrar_matriz_notas():
+    
+    for i in range(len(matrizNotas)): 
+        
+        for i in range(len(matrizNotas)):
+            print("Alumno" , i+1, ":", end=" ")
+            for j in range(len(matriz[i])):
+                print(matrizNotas[i][j], end= " ")
+        print()
+        
+
+def promedio_por_alumno(notasAlumno):
+    
+    suma = 0
+    for nota in notasAlumno:
+        suma+=nota
+        
+    return suma/len(notasAlumnos)
+
+def promedio_general_comision(matrizNotas):
+    
+
+
+
+def main():
+    cantAlumnos = int(input("Ingrese la cantidad de alumnos que desea procesar"))
+    cantNotasxAlumnos = int(input("Ingrese la cantidad de notas por alumno que desea procesar"))
+    
+    matrizNotas = cargar_matriz_alumnos(cantAlumnos, cantNotasxAlumnos)
+    
+    mostrar_matriz_notas(matrizNotas)
+    
+    
+    for i in range(len(matrizNotas)):
+        promedio = promedio_por_alumno(matrizNotas[i])
+        print("El promedio del alumno ", i+1, "es ", promedio)
+    
 #Ejercicio 4
 
 # Gestion de Stock
@@ -189,15 +225,15 @@
 # - Maximo stock de todos los productos
 # (falta completar)
 
-def crear_matriz_tiendas(cantTiendas,producto):
-    matriz_tiendas =[]
-     for i in range(cantTiendas):
-        tienda = []
-        for j in range(producto):
-            tienda.append(producto)
-        matriz_tiendas.append(tienda)
-        
-    return mamtriz_tiendas
+# def crear_matriz_tiendas(cantTiendas,producto):
+#     matriz_tiendas =[]
+#      for i in range(cantTiendas):
+#         tienda = []
+#         for j in range(producto):
+#             tienda.append(producto)
+#         matriz_tiendas.append(tienda)
+#         
+#     return mamtriz_tiendas
 
     
 
