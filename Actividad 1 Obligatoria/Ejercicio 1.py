@@ -26,7 +26,7 @@
 #Determinar qué día tuvo mayor producción
 #Mostrar el promedio de producción diaria
 
-turnos = 3
+
 def cargar_Matriz(numero_de_dias):
     
     matriz_dxt = []
@@ -54,9 +54,11 @@ def cargar_Matriz(numero_de_dias):
 
     
 def mostrar_matriz(matriz):
-    
+    print("Matriz de dias en filas y turnos en columnas: ")
+    dia = 0
     for fila in matriz:
-        print(fila)
+        dia+=1
+        print(f" dia {dia} {fila}")
     
 def calcular_produccion_semanal(matriz):
     
@@ -86,9 +88,30 @@ def calcular_produccion_por_turno(matriz,numero_de_dias,turnos):
     
     return lista_de_turnos
             
-            
+
+
+
+def calcular_dia_de_mas_produccion(matriz):
+    
+    lista_de_produccion =[]
+    
+    lista_de_produccion = [sum(dia) for dia in matriz]
+    
+    dia_maximo_de_produccion = lista_de_produccion.index(max(lista_de_produccion))
+    
+    return lista_de_produccion, dia_maximo_de_produccion
+    
         
-        
+def obtener_promedio_produccion_diaria(matriz,dias):
+    
+     suma_de_dias = 0
+    
+     for dia in matriz:
+         suma_de_dias += sum(dia)
+         
+     promedio = suma_de_dias/dias
+     
+     return promedio
     
     
 def main():
@@ -107,17 +130,28 @@ def main():
      
      total_de_produccion = calcular_produccion_semanal(matriz_semanal)
      
-     print("La cantidad producida en total es de: " ,total_de_produccion)
+     print("\nLa cantidad producida en total es de: " ,total_de_produccion)
      
      produccion_total_por_turno = calcular_produccion_por_turno(matriz_semanal,turnos,dias)
      
-     print(produccion_total_por_turno)
+     print("\nLista de cada turno con la suma de produccion por turnos: ")
+     
+     print(produccion_total_por_turno,"\n")
      
      for turno in produccion_total_por_turno:
          
          print(f"El turno {matriz_turnos[sumador]} produjo un total de {turno} unidades")
          
          sumador += 1
+         
+     lista_dia_por_produccion,dia_con_mayor_produccion = calcular_dia_de_mas_produccion(matriz_semanal)
+     
+     print(f"\nEl dia de mayor produccion fue el dia {dia_con_mayor_produccion+1} y con una produccion total de {lista_dia_por_produccion[dia_con_mayor_produccion]} unidades ")
+     
+     
+     promedio_diario = obtener_promedio_produccion_diaria(matriz_semanal,dias)
+     
+     print(f"\n El promedio diario de produccion es de {promedio_diario} unidades")
      
 main()
      
