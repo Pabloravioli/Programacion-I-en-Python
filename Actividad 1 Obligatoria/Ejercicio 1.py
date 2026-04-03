@@ -26,7 +26,8 @@
 #Determinar qué día tuvo mayor producción
 #Mostrar el promedio de producción diaria
 
-
+#Realice la funcion para cargar matriz y a tambien hice una matriz con turnos para que se muestre bien en el print a que dia corresponde cada fila
+  
 def cargar_Matriz(numero_de_dias):
     
     matriz_dxt = []
