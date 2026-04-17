@@ -1,5 +1,5 @@
 #Funciones Map
-#A cada objeto de un iterable lo pasa por la funcion osea el primer para metro y el segundo es el iterable
+#A cada objeto de un iterable lo pasa por la funcion osea el primer parametro y el segundo es el iterable
 #Recibe dos parametros devuelve un objeto de tipo map
 
 #map(funcion,lista)
