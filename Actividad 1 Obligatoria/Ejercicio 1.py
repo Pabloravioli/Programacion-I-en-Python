@@ -77,13 +77,13 @@ def calcular_produccion_por_turno(matriz,numero_de_dias,turnos):
     
     lista_de_turnos= []
     
-    for i in range(numero_de_dias):
+    for i in range(turnos):
         
         suma_por_turno = 0
         
-        for j in range(turnos):
+        for j in range(numero_de_dias):
             
-            suma_por_turno += matriz[j][i]
+            suma_por_turno += matriz[j][i]  
             
         lista_de_turnos.append(suma_por_turno)
     
@@ -133,7 +133,7 @@ def main():
      
      print("\nLa cantidad producida en total es de: " ,total_de_produccion)
      
-     produccion_total_por_turno = calcular_produccion_por_turno(matriz_semanal,turnos,dias)
+     produccion_total_por_turno = calcular_produccion_por_turno(matriz_semanal,dias,turnos)
      
      print("\nLista de cada turno con la suma de produccion por turnos: ")
      
@@ -152,7 +152,7 @@ def main():
      
      promedio_diario = obtener_promedio_produccion_diaria(matriz_semanal,dias)
      
-     print(f"\n El promedio diario de produccion es de {promedio_diario} unidades")
+     print(f"\n El promedio diario de produccion es de {round(promedio_diario,2)} unidades")
      
 main()
      
