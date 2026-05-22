@@ -31,10 +31,113 @@ El bucle debe repetirse hasta que el usuario decida salir (contemple agregar una
 Utilizar excepciones para controlar que la carga y la generación de los archivos se realice correctamente.
 Además, verifica que el título y el autor del libro sean cadenas de texto no vacías y el año de publicación un valor numérico (éste último utilizando excepciones)
 """
+import os
 
-
-def registrarLibro():
-    try:
-        rutaActual = os.path.dirname(__file__)
-        rutaArchivo = os.path.join(rutaActual,"libros.txt")
+def registrarLibro(titulo,autor,fechaDePublicacion,file):
     
+    linea = f"{titulo};{autor};{fechaDePublicacion}\n"
+    
+    file.write(linea)
+    
+    
+def mostrarLibros(file):
+    
+    for libro in file:
+        
+        titulo, autor, fecha = libro.strip().split(";")
+        
+        print(f" {titulo} \t {autor} \t {fecha}")
+        
+def main():
+    
+    respuesta = 0
+    
+    
+    
+    rutaActual = os.path.dirname(__file__)
+    rutaArchivo = os.path.join(rutaActual,"libros.txt")
+    
+    while respuesta !="-1":
+        
+        try:
+        
+            respuesta = input("Seleccione una opcion: 1 para registrar un libro, 2 para mostrar libros, -1 para salir: \n")
+            
+        except Exception as e:
+            
+            print("El error fue: " ,e)
+            
+        if respuesta == "1":
+            
+            seguir = "1"
+            
+            while seguir == "1":
+                
+                titulo = ""
+                
+                autor = ""
+                
+                fecha = 0
+                
+                while titulo == "":
+            
+                    titulo = input("Ingrese el titulo del libro:  ")
+                
+                    if titulo == "":
+                    
+                        print("Titulo invalido")
+                        
+                while autor == "":
+                    
+                    autor = input("Ingrese el autor del libro:  ")
+                    
+                    if autor == "":
+                        print("Autor invalido")
+                        
+                try:
+                
+                    fecha = int(input("Ingrese la fecha de publicacion del libro:  "))
+                    
+                except Exception as e:
+                    
+                    print("La fecha tiene que ser de valor numerico unicamente \n")
+                
+                try:
+                    with open (rutaArchivo, "a") as archivo:
+                        
+                        registrarLibro(titulo,autor,fecha,archivo)
+                        
+                        seguir = input("Seleccione 1  ingresar otro libro, -1 para salir: \n")
+                 
+                except Exception as e:
+                     
+                     print("El error es: 1",e)
+                     
+        
+        elif respuesta == "2":
+            
+            try:
+                
+                with open (rutaArchivo, "r") as archivo:
+                    
+                    mostrarLibros(archivo)
+                    
+            except Exception as e:
+                
+                print("El erro  es: ",e)
+                
+        elif respuesta == "-1":
+            
+            print("Saliendo... \n")
+            
+            
+        else:
+            
+            print("Opcion invalida")
+                        
+                        
+            
+            
+        
+          
+main()

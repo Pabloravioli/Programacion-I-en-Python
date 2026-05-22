@@ -1,0 +1,7 @@
+pedro;autor;1999
+oaa;eaaa;299
+45;213;123
+asd;asd;123
+asd;asd;123
+123;132;0
+23;23;0

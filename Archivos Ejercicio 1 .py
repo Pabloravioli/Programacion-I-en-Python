@@ -34,7 +34,7 @@ def leerAlumnoMenor1000(ruta):
     
     try:
         
-        with open(ruta, "r") as achivoAlumnos:
+        with open(ruta, "r") as archivoAlumnos:
             for registro in archivoAlumnos:
                 legajo,nombreAlumno = registro.split(";")
                 
