@@ -32,7 +32,9 @@ def main():
     
     sumaDeCadenas = sumarCadenas(primeraCadena,segundaCadena)
     
-    if resultado is None:
+    if sumaDeCadenas is None:
+        
+        print(sumaDeCadenas)
         
         print("Error : ambas cadenas deben ser numero entero!")
         

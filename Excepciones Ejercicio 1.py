@@ -12,16 +12,15 @@ Escribir tambien un programa que permita probasr el correcto funcionamiento de l
 
 def cargarNumero():
     
-    bandera=True
+    bandera = True
     
     while bandera:
         try:
-            numero= int(input("Ingrese un numero"))
+            return int(input("Ingrese un numero"))
+        
+        except ValueError as e:
             
-            return numero
-        except valueError as e:
-            
-            print("Error", e)
+            print(e)
             
 numero = cargarNumero()
 

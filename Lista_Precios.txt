@@ -1,2 +1,4 @@
-4977;4120.35;producto 0
-6767;5666.37;producto 1
+5711;1688.64;producto 0
+8890;3247.06;producto 1
+7075;3454.18;producto 2
+1564;1243.96;producto 3

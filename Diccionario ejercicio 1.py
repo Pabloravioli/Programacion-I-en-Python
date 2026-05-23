@@ -11,20 +11,49 @@ canciones = []
 bandera = True
 
 while bandera:
-    artista = input("Ingrese el artista")
+    artista = input("Ingrese el artista: ")
 
     if artista == "":
         bandera=False
     else:
         cancion = {}
         cancion["artista"] = artista
-        cancion["titulo"]= input("Ingrese el titulo de la cancion")
-        cancion["duracion"] = input("Ingresar la duracion en segundos")
-        cancion["tamanio"] = int(input("Ingresar el tamañño en kb de la cancion"))
+        cancion["titulo"]= input("Ingrese el titulo de la cancion: ")
+        bandera2 = True
+        while bandera2:
+            duracion = input("Ingresar la duracion en segundos: ")
+            try:
+                esNumero = int(duracion)
+                cancion["duracion"] = esNumero
+                bandera2 = False
+            except:
+                print("La duracion tiene que ser en segundos")
+        
+        bandera3 = True
+        while bandera3:
+            tamanio = input("Ingresar el tamaño en kb de la cancion: ")
+            try:
+                esNumero = int(tamanio)
+                cancion["tamanio"] = esNumero
+                bandera3 = False
+            except:
+                print("El tamanio tiene que ser en kb")
         canciones.append(cancion)
-
-
+        
 for cancion in canciones:
-    print(cancion["titulo"], "-",cancion["Artista"], ""
+    
+    print(cancion)
+    
+
+
+
+
+
+
+
+
+
+
+
 
 
