@@ -1,0 +1,5 @@
+1001;Juan Pérez;8;7;9
+1002;María Gómez;4;4;4
+1003;Lucas Fernández;10;8;7
+1004;Sofía Ramírez;3;3;3
+1005;Tomás López;2;2;2

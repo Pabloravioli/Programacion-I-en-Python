@@ -1,0 +1,5 @@
+Juan Pérez;8.0 
+María Gómez;4.0 
+Lucas Fernández;8.33 
+Sofía Ramírez;3.0 
+Tomás López;2.0 
