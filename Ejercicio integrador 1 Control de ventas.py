@@ -1,5 +1,9 @@
 """
 
+EN ESTE EJERCICIO TUVE UN PEQUEÑO ERROR QUE JODIO TODO ESTABA PÁSANDO A INT EL PRECIO QUE VIENE CON DECIMAL POR LO
+
+TANTO NO DEJO AVANZAR EL PROGRAMA CUANDO ALGO TIENE PRECIO TENGO QUE PASARLO A FLOAT
+
 Una empresa posee un archivo ventas.txt con el siguiente formato:
 
 codigo_producto;descripcion;cantidad;precio_unitario
@@ -30,7 +34,7 @@ def leerArchivo(file):
         
         cantidad = int(cantidad)
         
-        precioUnitario = int(precioUnitario)
+        precioUnitario = round(float(precioUnitario),2)
         
         producto = {
             
@@ -40,7 +44,7 @@ def leerArchivo(file):
             
             "Cantidad":cantidad,
             
-            "Precio Unitario":precioUnitario
+            "Precio unitario":precioUnitario
             
             }
         
@@ -52,28 +56,101 @@ def leerArchivo(file):
 
 def calcularCantidadVendidaYRecaudacionTotalPorProducto(listaProductos):
     
-    listaDeVentas = []
+    
+    
+    
+    
+    productosXVentas={}
     
     for producto in listaProductos:
         
-        productosXVentas={}
-    
-
-    
-    
-def main():
-    
-     try:
-    
-        with open("ventas.txt", "r", encoding="utf-8") as archivo:
+        if producto["Codigo"] not in productosXVentas:
+            
+            productosXVentas[producto["Codigo"]] = {
+                "Codigo":producto["Codigo"],
+                "Descripcion":producto["Descripcion"],
+                "Cantidad":producto["Cantidad"],
+                "Precio Unitario":producto["Precio unitario"],
+                "Cantidad total":producto["Cantidad"],
+                "Recaudacion total":producto["Precio unitario"]*producto["Cantidad"],
+                
+                
+                }
         
-        productos = leerArchivo(archivo)
+        else:
+            
+            productosXVentas[producto["Codigo"]]["Cantidad total"] += producto["Cantidad"]
+            
+            productosXVentas[producto["Codigo"]]["Recaudacion total"] += producto["Cantidad"] * producto["Precio unitario"]
+
+       
+       
+        
+    return list(productosXVentas.values())
+
+
+def generarReporte(reporte):
     
+    try:
+        
+        rutaActual = os.path.dirname(__file__)
+        
+        rutaArchivo = os.path.join(rutaActual,"reporte.txt")
+        
     except Exception as e:
         
         print(e)
         
-    calcularCantidadVendidaYRecaudacionTotalPorProducto(productos)
+    try:
+        with open(rutaArchivo,"w",encoding="utf-8") as reporteDeVentasTotal:
+            
+            for ventaTotal in reporte:
+                
+                codigo = str(ventaTotal["Codigo"])
+                
+                cantidad = str(ventaTotal["Cantidad total"])
+                
+                recaudacion =str(ventaTotal["Recaudacion total"])
+                
+                linea = f"{codigo};{cantidad};{recaudacion} \n"
+                
+                reporteDeVentasTotal.write(linea)
+                
+            
+    except Exception as e:
+        
+        print(e)
+        
+        
+def mostrarProductoConMasRecaudacion(reporte):
+    
+    print(max(reporte, key=lambda x: x["Recaudacion total"]))
+    
+
+        
+        
+
+    
+def main():
+    
+    
+    
+    try:
+    
+        with open("ventas.txt", "r", encoding="utf-8") as archivo:
+            
+            productos = leerArchivo(archivo)
+    
+    except Exception as e:
+        
+         
+        print(e)
+        
+    reporte = calcularCantidadVendidaYRecaudacionTotalPorProducto(productos)
+    
+    generarReporte(reporte)
+    
+    mostrarProductoConMasRecaudacion(reporte)
     
 main()
 

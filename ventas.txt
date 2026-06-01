@@ -1,0 +1,10 @@
+1001;Laptop Lenovo ThinkPad;2;1250.50
+1002;Mouse Inalámbrico Logitech;5;18.99
+1003;Teclado Mecánico Redragon;3;45.75
+1001;Laptop Lenovo ThinkPad;1;1250.50
+1004;Monitor Samsung 24 Pulgadas;2;210.00
+1002;Mouse Inalámbrico Logitech;4;18.99
+1005;Disco SSD Kingston 1TB;6;89.90
+1003;Teclado Mecánico Redragon;2;45.75
+1004;Monitor Samsung 24 Pulgadas;1;210.00
+1005;Disco SSD Kingston 1TB;3;89.90
