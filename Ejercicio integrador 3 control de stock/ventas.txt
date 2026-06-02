@@ -1,0 +1,10 @@
+001;Lapiz;30
+002;Cuaderno;60
+003;Birome;80
+001;Lapiz;90
+004;Regla;20
+005;Goma;200
+006;Tijera;15
+007;Cartuchera;35
+008;Compas;10
+009;Marcador;45
