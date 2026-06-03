@@ -20,9 +20,8 @@ import os
 
 def generarDiccionarioStockFinal(ingresos,ventas):
     
-    listaStock = []
-    
-    listaVentas = []
+    listaStock = {}
+    listaVentas = {}
     
    
     
@@ -32,15 +31,13 @@ def generarDiccionarioStockFinal(ingresos,ventas):
         
         cantidad = int(cantidad)
         
-        inventario = {
+        listaStock[codigo] = {
             
             "Codigo":codigo,
             "Producto":producto,
             "Cantidad":cantidad
             
             }
-        
-        listaStock.append(inventario)
         
     
     for venta in ventas:
@@ -48,37 +45,47 @@ def generarDiccionarioStockFinal(ingresos,ventas):
         
         cantidad = int(cantidad)
         
-        listaVentas[codigo] = {
-            
-            "Codigo":codigo,
-            "Producto":producto,
-            "Cantidad":cantidad
-            
-            }
+        if codigo not in listaVentas:
         
-    for dato in listaStock:
+            listaVentas[codigo] = {
+                
+                "Codigo":codigo,
+                "Producto":producto,
+                "Cantidad":cantidad
+                
+                }
         
-        if dato not in listaVentas:
+        else:
+             listaVentas[codigo]["Cantidad"] += cantidad
             
-            stockFinal = {
-                "Codigo":dato["Codigo"],
-                "Producto":dato["Producto"],
-                "Cantidad":dato["Cantidad"]
+    stockFinal = {}
+   
+    for dato, detalle in listaStock.items():
+        stockFinal[dato] = {
+            "Codigo":detalle["Codigo"],
+            "Producto":detalle["Producto"],
+            "Cantidad":detalle["Cantidad"],
+            "Cantidad Final":detalle["Cantidad"]
+            
                 
                 }
             
-        else:
+    for dato, detalle in listaVentas.items():
+        
+        if dato in stockFinal:
             
-           stockFinal[dato]["Cantidad FINAL"] -= listaVentas[dato]["Cantidad"]
+            stockFinal[dato]["Cantidad Final"] = stockFinal[dato]["Cantidad"] - detalle["Cantidad"]
             
                 
     return list(stockFinal.values())
     
 def informarStockNegativo(stockFinal):
     
-    stockNegativo = list(filter(lambda stock: stock["Cantidad"] < 0, stockFinal))
+    stockNegativo = list(filter(lambda stock: stock["Cantidad Final"] < 0, stockFinal))
     
-    print(stockNegativo)
+    for stock in stockNegativo:
+        
+        print(stock)
 
 def generarStockFinal(informacionFinal):
     rutaActual = os.path.dirname(__file__)
@@ -100,7 +107,7 @@ def generarStockFinal(informacionFinal):
                 
     except Exception as e:
         
-        print(e)
+        print("1",e)
     
         
         
@@ -123,7 +130,7 @@ def main():
         
     except Exception as e:
         
-        print(e)
+        print("2",e)
         
         
     informarStockNegativo(listaStockFinal)
