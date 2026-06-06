@@ -45,5 +45,260 @@ CODIGO;DESTINO;RECAUDACION;ESTADO
 El estado puede ser LLENO o CON LUGAR.
  
  
-
 """
+
+import os
+
+AZUL    = "\033[34m"
+VERDE   = "\033[32m"
+AMARILLO= "\033[33m"
+ROJO    = "\033[31m"
+RESET   = "\033[0m"
+
+def cargar_vuelos(nombre_archivo):
+    
+    matrizVuelos = []
+    
+    try:
+        with open(nombre_archivo,"r",encoding = "utf-8") as archivo:
+            
+            for vuelo in archivo:
+                
+                linea = vuelo.strip()
+                
+                if linea == "":
+                    
+                    print(f"{ROJO} Informacion de vuelo inexistente {RESET}")
+                    
+                else:
+                    
+                    linea = linea.split(";")
+                    
+                    
+                    if len(linea) < 5:
+                        
+                        print("Informacion de vuelo incompleta")
+                        
+                    elif len(linea) == 5:
+                        
+                        codigo = linea[0]
+                        
+                        destino = linea[1]
+                        
+                        aerolinea = linea[2]
+                        
+                        pasajeros = int(linea[3])
+                        
+                        precio = int(linea[4])
+                        
+                        vuelo = [codigo,destino, aerolinea, pasajeros, precio]
+                        
+                        matrizVuelos.append(vuelo)
+                    
+            
+    except Exception as e:
+        
+        print(e)
+        
+    return matrizVuelos
+
+
+def mostrar_tabla(matriz):
+    
+    print(f"{'CODIGO':<10} {'DESTINO':<15} {'AEROLINEA':<10} {'PASAJEROS':>15} {'PRECIO':>10}")
+    
+    print("-" * 64)
+    
+    for vuelo in matriz:
+        
+        print(f"{vuelo[0]:<10} {vuelo[1]:<15} {vuelo[2]:<10} {vuelo[3]:>15} {vuelo[4]:>10}")
+        
+    print("#" * 64 , "\n")
+    
+    
+def buscar_vuelo(matriz, codigo):
+    
+    
+    
+    for vuelo in matriz:
+        
+        if codigo == vuelo[0]:
+            
+            return f"{vuelo[0]:<10} {vuelo[1]:<15} {vuelo[2]:<10} {vuelo[3]:>15} {vuelo[4]:>10}"
+    return None
+    
+    
+    
+def calcular_recaudacion(pasajeros, precio_ticket):
+    
+    
+    
+    return pasajeros * precio_ticket
+    
+    
+def agregar_vuelo(matriz, codigo, destino, aerolinea, pasajeros, precio_ticket):
+    
+    vueloNuevo = [codigo, destino, aerolinea, pasajeros, precio_ticket]
+    
+    matriz.append(vueloNuevo)
+    
+
+def estadistica(matriz):
+    
+    diccionarioVuelos ={}
+    
+    cantidadVuelos = len(matriz)
+    
+    vuelosLlenos = 0
+    
+    vuelosConLugar = 0
+    
+    recaudacionTotal = 0
+    
+    vueloMasCaro = max(matriz, key= lambda vuelo: vuelo[4])
+    
+    vueloMasBarato = min(matriz, key=lambda vuelo: vuelo[4])
+    
+    
+    
+    for vuelo in matriz:
+        
+        if vuelo[3] >= 200:
+            
+            vuelosLLenos +=1
+        else:
+            
+            vuelosConLugar +=1
+            
+        recaudacionXVuelo = vuelo[3] * vuelo[4]
+        
+        recaudacionTotal += recaudacionXVuelo
+            
+        
+            
+        
+            
+        
+    diccionarioVuelos = {
+        "cantidad_total": int(cantidadVuelos),
+        "vuelos_llenos": int(vuelosLLenos),
+        "vuelos_con_lugar": int(vuelosConLugar),
+        "recaudacion_total": round(float(recaudacionTotal),2),
+        "vuelo_mas_caro": str(vueloMasCaro),
+        "vuelo_mas_barato": str(vueloMasBarato)
+        }
+        
+
+def suma_pasajeros(matriz, indice):
+    
+    if len(matriz) == indice:
+        
+        return 0
+    
+    return matriz[indice][3] + suma_pasajeros(matriz, indice+1)
+"""
+8.  Escribir la funcion guardar_reporte(matriz, nombre_archivo) que genere un archivo de texto con el siguiente formato por linea:
+CODIGO;DESTINO;RECAUDACION;ESTADO
+El estado puede ser LLENO o CON LUGAR.
+"""
+
+def guardar_reporte(matriz,nombre_archivo):
+    
+    try:
+        with open(nombre_archivo, "w", encoding = "utf-8") as archivo:
+            
+            for vuelo in matriz:
+                
+                if vuelo[3] >= 200:
+                    
+                    estado = "LLENO"
+                else:
+                    
+                    estado = "VACIO"
+            
+                linea = f"{vuelo[0]};{vuelo[1]};{vuelo[3] * vuelo[4]};{estado}"
+                
+                archivo.write(linea)
+                
+    except Exception as e:
+        
+        print(e)
+        
+        
+
+def main():
+    
+    matrizVuelos = cargar_vuelos("vuelos.txt")
+    
+    mostrar_tabla(matrizVuelos)
+    
+    codigo = (input("Ingrese codigo del vuelo: ")).upper()
+    
+    vueloEncontrado = buscar_vuelo(matrizVuelos,codigo)
+    
+    if vueloEncontrado == None:
+        
+        print(f"{ROJO} Vuelo no encontrado {RESET}")
+    else:
+        
+        print(f"{VERDE} Vuelo encontrado {RESET}")
+        
+        print(vueloEncontrado)
+        
+        print("#" * 64, "\n")
+        
+    print(f"{'RECAUDACION TOTAL POR VUELO':<10}")
+    
+    print("-" * 64)
+    
+    print(f"{'CODIGO':<10} {'DESTINO':<15} {'AEROLINEA':<10} {'PASAJEROS':>15} {'PRECIO':>10}")
+    
+    print("-" * 64)
+    
+    
+        
+    for vuelo in matrizVuelos:
+        
+        recaudacionXVuelo = calcular_recaudacion(vuelo[3], vuelo[4])
+        
+        print (f"{vuelo[0]:<10} {vuelo[1]:<15} {vuelo[2]:<10} {vuelo[3]:>15} {vuelo[4]:>10}")
+        
+        print(f"\n{VERDE} {recaudacionXVuelo} {RESET}")
+        
+        print("-" * 64)
+        
+    print("#" * 64 , "\n")
+        
+    
+    agregar_vuelo(matrizVuelos, "78jh", "agartha", "blueWings" , 124 , 1000)    
+        
+    
+    print(f"{'VUELOS ACTUALIZADOS':<10} \n")
+    
+    
+    print(f"{'CODIGO':<10} {'DESTINO':<15} {'AEROLINEA':<10} {'PASAJEROS':>15} {'PRECIO':>10}")
+     
+    print("-" * 64)
+    
+    for vuelo in matrizVuelos:
+        
+         print (f"{vuelo[0]:<10} {vuelo[1]:<15} {vuelo[2]:<10} {vuelo[3]:>15} {vuelo[4]:>10}")
+         print("-" * 64)
+    print("#" * 64 , "\n")
+        
+        
+    sumaDePasajeros = suma_pasajeros(matrizVuelos, 0)
+    
+    print(f"{'SUMA PASAJEROS EN TOTAL':<10}")
+     
+    print("-" * 64)
+    
+    print(f"{VERDE}{sumaDePasajeros:< 10} {RESET}")   
+     
+    print("#" * 64 , "\n")
+    
+    guardar_reporte(matrizVuelos,"reporte.txt")
+
+main()
+
+
