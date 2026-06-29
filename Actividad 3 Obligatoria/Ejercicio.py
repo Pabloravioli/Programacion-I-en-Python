@@ -57,10 +57,13 @@ e) Implementar una función recursiva que reciba una colección con los kilómet
 import random
 
 def generarArchivo(nombreArchivo):
+    
+    cantidadRegistros = 1000
+    
     try:
         with open(nombreArchivo, "w", encoding = "utf-8") as archivo:
             
-            for registro in range(1,1001):
+            for registro in range(cantidadRegistros):
                 
                 identificador =  random.randint(1,50)
                 
@@ -76,16 +79,7 @@ def generarArchivo(nombreArchivo):
         
         print(e)
         
-"""
-b) Procesar el archivo y obtener para cada conductor:
 
-Total de viajes realizados
-
-Total de kilómetros recorridos
-
-Promedio de kilómetros por viaje
-
-"""
 
 def procesarArchivo(archivo):
     
@@ -155,14 +149,7 @@ def procesarArchivo(archivo):
     return diccionarioConductores
                     
                 
-"""
-c) Determinar:
 
-Conductor con mayor cantidad de kilómetros recorridos
-
-Conductor con mayor promedio de kilómetros por viaje.
-
-"""
                     
 def determinarConductores(diccionario):
     
@@ -170,17 +157,23 @@ def determinarConductores(diccionario):
     
     conductorMayorPromedio = max(diccionario.values(), key=lambda conductor: conductor["Promedio"])
     
-    print(f"Conductor con mayor kilometros recorridos ID {conductorMayorKilometros['ID']} con un recorrido de {conductorMayorKilometros['Kilometros']}")
+    print(("Conductor con mayor Kilometros recorridos").upper())
+    print("#" * 41)
+
+    print(f"{'ID':<10} {'Viajes':<10} {'Kilometros':<12}")
+    print("-" * 41)
     
-    print(f"Conductor con mayor promedio de kilometros por viaje ID {conductorMayorPromedio['ID']} con un recorrido de {conductorMayorPromedio['Promedio']}")
-    
+    print(f"{conductorMayorKilometros['ID']:<10} {conductorMayorKilometros['Viajes']:<10} {conductorMayorKilometros['Kilometros']:<12} ")
+    print("-" * 41, "\n")
+
+    print(("Conductor con mayor Promedio de kilometros por viajes").upper())
+    print("#" * 53)
+    print(f"{'ID':<10} {'Viajes':<10} {'Kilometros':<12} {'Promedio':<10}")
+    print("-" * 53)
+    print(f"{conductorMayorPromedio['ID']:<10} {conductorMayorPromedio['Viajes']:<10} {conductorMayorPromedio['Kilometros']:<12} {conductorMayorPromedio['Promedio']:<10} ")
+    print("-" * 53)
                 
-"""
-d) Generar un archivo plano llamado reporte_viajes.txt que contenga una línea por cada conductor con el siguiente formato:
 
-id_conductor;viajes_totales;kilometros_totales;promedio_km_por_viaje
-
-"""
 
 
 def generarArchivoReporte(nombreReporte,diccionario):
