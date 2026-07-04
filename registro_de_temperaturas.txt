@@ -1,0 +1,3 @@
+Madrid;32°C
+Buenos Aires;14°C
+Ciudad de México;22°C

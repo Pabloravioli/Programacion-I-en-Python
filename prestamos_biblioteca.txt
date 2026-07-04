@@ -1,0 +1,10 @@
+38;Infantil;7;2;2332
+1;Novela;13;1;1617
+33;Tecnologia;7;1;3206
+34;Historia;10;3;1032
+17;Historia;2;4;1346
+2;Novela;28;5;4423
+37;Tecnologia;17;4;554
+12;Infantil;14;3;4684
+28;Novela;20;4;2541
+16;Tecnologia;27;5;366
