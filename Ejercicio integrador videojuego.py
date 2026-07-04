@@ -157,11 +157,56 @@ def procesarArchivo(archivo):
         
     return diccionarioJugadores
 
+"""
 
+c) Determinar:
 
+Jugador con mayor cantidad de puntos acumulados.
+
+Jugador con mayor promedio de puntos por partida.
+
+"""
+
+def determinarJugador(diccionarioDeJugadores):
+    
+    jugadorConMasPuntos = max(diccionarioDeJugadores.values(), key = lambda jugador :  jugador["Total de puntos"])
+    
+    jugadorConMayorPromedioDePuntosPorPartidas = max(diccionarioDeJugadores.values(), key = lambda jugador: jugador["Promedio"])
+    
+    return jugadorConMasPuntos, jugadorConMayorPromedioDePuntosPorPartidas
     
         
+"""
+
+d) Generar un archivo plano llamado reporte_jugadores.txt que contenga una línea por cada jugador con el siguiente formato:
+
+id_jugador;partidas_totales;puntos_totales;promedio_puntos_por_partida
+
+"""
+
+def generarArchivo(nuevoArchivo,diccionarioDeJugadores):
+    
+    try:
+        with open(nuevoArchivo, "w", encoding = "utf-8") as archivo:
+            
+            for jugador in diccionarioDeJugadores.values():
+                
+                idJugador = jugador["ID"]
+                
+                partidasTotales = jugador["Total de partidas"]
+                
+                puntosTotales = jugador["Total de puntos"]
+                
+                promedio = jugador["Promedio"]
+                
+                linea = f"{idJugador};{partidasTotales};{puntosTotales};{promedio}\n"
+                
+                archivo.write(linea)
+                
+                
+    except Exception as e:
         
+        print(e)
     
 
 
@@ -175,8 +220,16 @@ def main():
     for jugador in diccionarioJugadores.values():
         
         print(f"{jugador['ID']};{jugador['Total de partidas']};{jugador['Total de puntos']}")
+        
+    jugadorConMasPuntos, jugadorConMayorPromedio = determinarJugador(diccionarioJugadores)
     
+    print(f"Jugador con mas puntos {jugadorConMasPuntos['ID']} con una puntuacion de {jugadorConMasPuntos['Total de puntos']}")
+    
+    print(f"Jugador con mayor promedio de puntos por partidas {jugadorConMayorPromedio['ID']} con una puntuacion de {jugadorConMayorPromedio['Promedio']}")
 
+    generarArchivo("reporte_jugadores.txt",diccionarioJugadores)
+
+        
 main()
 
 
